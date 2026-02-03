@@ -107,8 +107,7 @@ public class Car implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public Car() {
-    }
+    public Car() {}
 
     public Car(Long id, String brand, String model, Integer year, Double price, Integer rangeKm, String color, String imageUrl) {
         this.id = id;
