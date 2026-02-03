@@ -1,23 +1,15 @@
-package com.example.tesla.model;
+package com.example.tesla.dto;
 
+
+import com.example.tesla.model.Car;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
-@Entity
-@Table(name="car")
-
-public class Car implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+public class CarIn implements Serializable {
     @NotBlank
     @Length(min = 2, max = 30)
     private String brand;
@@ -98,15 +90,26 @@ public class Car implements Serializable {
         this.imageUrl = imageUrl;
     }
 
-    public Car() {}
+    public Car toCar(CarIn carIn) {
+        return new Car(
+                carIn.getBrand(),
+                carIn.getModel(),
+                carIn.getYear(),
+                carIn.getPrice(),
+                carIn.getRangeKm(),
+                carIn.getColor(),
+                carIn.getImageUrl(),
+                null
+        );
+    }
 
-    public Car(String brand, String model, Integer year, Double price, Integer rangeKm, String color, String imageUrl) {
-        this.brand = brand;
-        this.model = model;
-        this.year = year;
-        this.price = price;
-        this.rangeKm = rangeKm;
-        this.color = color;
-        this.imageUrl = imageUrl;
+    public void updateCar(Car car) {
+        car.setBrand(brand);
+        car.setModel(model);
+        car.setYear(year);
+        car.setPrice(price);
+        car.setRangeKm(rangeKm);
+        car.setColor(color);
+        car.setImageUrl(imageUrl);
     }
 }
