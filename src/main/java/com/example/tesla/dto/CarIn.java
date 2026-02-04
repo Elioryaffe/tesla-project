@@ -98,10 +98,10 @@ public class CarIn implements Serializable {
                 carIn.getPrice(),
                 carIn.getRangeKm(),
                 carIn.getColor(),
-                carIn.getImageUrl(),
-                null
+                carIn.getImageUrl()
         );
     }
+
 
     public void updateCar(Car car) {
         car.setBrand(brand);
