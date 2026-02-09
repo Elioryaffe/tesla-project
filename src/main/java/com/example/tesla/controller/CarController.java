@@ -47,4 +47,39 @@ public class CarController {
         carService.delete(dbCar.get());
         return new ResponseEntity<>("DELETED", HttpStatus.OK);
     }
+
+    @GetMapping("/brand/{brand}")
+    public ResponseEntity<?> getByBrand(@PathVariable String brand) {
+        return new ResponseEntity<>(carService.findByBrand(brand), HttpStatus.OK);
+    }
+
+    @GetMapping("/year/{year}")
+    public ResponseEntity<?> getByYear(@PathVariable int year) {
+        return new ResponseEntity<>(carService.findByYear(year), HttpStatus.OK);
+    }
+
+    @GetMapping("/color/{color}")
+    public ResponseEntity<?> getByColor(@PathVariable String color) {
+        return new ResponseEntity<>(carService.findByColor(color), HttpStatus.OK);
+    }
+
+    @GetMapping("/brand/{brand}/year/{year}")
+    public ResponseEntity<?> getByBrandAndYear(@PathVariable String brand, @PathVariable int year) {
+        return new ResponseEntity<>(carService.findByBrandAndYear(brand, year), HttpStatus.OK);
+    }
+
+    @GetMapping("/yearGreaterThan/{year}")
+    public ResponseEntity<?> getByYearGreaterThan(@PathVariable int year) {
+        return new ResponseEntity<>(carService.findByYearGreaterThan(year), HttpStatus.OK);
+    }
+
+    @GetMapping("/price")
+    public ResponseEntity<?> getByPriceBetween(@RequestParam double min, @RequestParam double max) {
+        return new ResponseEntity<>(carService.findByPriceBetween(min, max), HttpStatus.OK);
+    }
+
+    @GetMapping("/rangeKm/{rangeKm}")
+    public ResponseEntity<?> getByRangeKm(@PathVariable int rangeKm) {
+        return new ResponseEntity<>(carService.findByRangeKm(rangeKm), HttpStatus.OK);
+    }
 }
