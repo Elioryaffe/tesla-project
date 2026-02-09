@@ -9,8 +9,10 @@ import java.util.Optional;
 
 @Service
 public class CarService {
+
     @Autowired
-    CarRepository repository;
+    private CarRepository repository;
+
 
     public Iterable<Car> all() {
         return repository.findAll();
@@ -26,5 +28,33 @@ public class CarService {
 
     public void delete(Car car) {
         repository.delete(car);
+    }
+
+    public Iterable<Car> findByBrand(String brand) {
+        return repository.findByBrand(brand);
+    }
+
+    public Iterable<Car> findByYear(int year) {
+        return repository.findByYear(year);
+    }
+
+    public Iterable<Car> findByColor(String color) {
+        return repository.findByColor(color);
+    }
+
+    public Iterable<Car> findByBrandAndYear(String brand, int year) {
+        return repository.findByBrandAndYear(brand, year);
+    }
+
+    public Iterable<Car> findByYearGreaterThan(int year) {
+        return repository.findByYearGreaterThan(year);
+    }
+
+    public Iterable<Car> findByPriceBetween(double min, double max) {
+        return repository.findByPriceBetween(min, max);
+    }
+
+    public Iterable<Car> findByRangeKm(Integer rangeKm) {
+        return repository.findByRangeKm(rangeKm);
     }
 }
