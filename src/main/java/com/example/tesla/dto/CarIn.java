@@ -110,6 +110,6 @@ public class CarIn implements Serializable {
         car.setPrice(price);
         car.setRangeKm(rangeKm);
         car.setColor(color);
-        car.setImageUrl(imageUr);
+        car.setImageUrl(imageUrl);
     }
 }
