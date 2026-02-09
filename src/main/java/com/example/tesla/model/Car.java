@@ -95,7 +95,7 @@ public class Car implements Serializable {
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUr;
+        this.imageUrl = imageUrl;
     }
 
     public Car() {}
