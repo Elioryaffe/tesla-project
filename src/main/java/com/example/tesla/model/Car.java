@@ -42,7 +42,7 @@ public class Car implements Serializable {
 
     private String imageUrl;
 
-    public Long getId() {
+    public Long getI() {
         return id;
     }
 
