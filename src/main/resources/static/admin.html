@@ -5,19 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tesla - Admin Panel</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: 'Gotham SSm A', 'Gotham SSm B', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: #f4f4f4;
-            color: #181b21;
+            color: #333;
         }
 
-        /* Header */
         header {
             background: #000;
             color: #fff;
@@ -25,7 +20,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
@@ -34,30 +28,38 @@
             letter-spacing: 2px;
         }
 
-        .back-btn {
-            background: #3457D5;
-            color: #fff;
+        .header-btns {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
             padding: 10px 24px;
             border-radius: 20px;
-            text-decoration: none;
             font-size: 13px;
             font-weight: 600;
-            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .back-btn:hover {
-            background: #2845b8;
-            transform: translateY(-2px);
+        .btn-back {
+            background: #3e6ae1;
+            color: #fff;
         }
 
-        /* Container */
+        .btn-logout {
+            background: #dc3545;
+            color: #fff;
+        }
+
         .container {
             max-width: 1400px;
             margin: 40px auto;
             padding: 0 40px;
         }
 
-        /* Top Bar */
         .top-bar {
             display: flex;
             justify-content: space-between;
@@ -68,60 +70,31 @@
         .page-title {
             font-size: 32px;
             font-weight: 600;
-            color: #000;
         }
 
-        .add-btn {
-            background: #3457D5;
+        .btn-add {
+            background: #3e6ae1;
             color: #fff;
             padding: 14px 32px;
-            border: none;
             border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .add-btn:hover {
-            background: #2845b8;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(52, 87, 213, 0.4);
-        }
-
-        /* Form Section */
         .form-section {
             background: #fff;
             padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
             margin-bottom: 40px;
             display: none;
         }
 
         .form-section.active {
             display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .form-title {
             font-size: 24px;
-            font-weight: 600;
             margin-bottom: 30px;
-            color: #000;
         }
 
         .form-grid {
@@ -137,16 +110,13 @@
             gap: 8px;
         }
 
-        .form-group.full-width {
+        .form-group.full {
             grid-column: 1 / -1;
         }
 
         .form-group label {
             font-weight: 600;
             font-size: 13px;
-            color: #333;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .form-group input {
@@ -154,42 +124,25 @@
             border: 2px solid #e0e0e0;
             border-radius: 6px;
             font-size: 15px;
-            transition: all 0.3s ease;
-            background: #fafafa;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #3457D5;
-            background: #fff;
+            border-color: #3e6ae1;
         }
 
-        .form-group input.error {
-            border-color: #dc3545;
-        }
-
-        .error-message {
-            color: #dc3545;
-            font-size: 12px;
-            margin-top: -4px;
-        }
-
-        .color-input-group {
+        .color-group {
             display: flex;
             gap: 12px;
-            align-items: center;
         }
 
-        .color-input-group input[type="color"] {
+        .color-group input[type="color"] {
             width: 60px;
             height: 50px;
-            border: 2px solid #e0e0e0;
-            border-radius: 6px;
             cursor: pointer;
-            padding: 4px;
         }
 
-        .color-input-group input[type="text"] {
+        .color-group input[type="text"] {
             flex: 1;
         }
 
@@ -199,27 +152,15 @@
             margin-top: 30px;
         }
 
-        .btn {
-            padding: 14px 32px;
-            border: none;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .form-actions .btn {
             flex: 1;
+            padding: 14px 32px;
+            border-radius: 50px;
         }
 
         .btn-primary {
-            background: #3457D5;
+            background: #3e6ae1;
             color: #fff;
-        }
-
-        .btn-primary:hover {
-            background: #2845b8;
-            transform: translateY(-2px);
         }
 
         .btn-secondary {
@@ -227,74 +168,57 @@
             color: #fff;
         }
 
-        .btn-secondary:hover {
-            background: #5a6268;
-        }
-
-        /* Cars Grid */
-        .cars-section {
-            margin-top: 40px;
-        }
-
-        .section-subtitle {
+        .cars-section h2 {
             font-size: 20px;
-            font-weight: 600;
             margin-bottom: 25px;
-            color: #000;
         }
 
-        .cars-grid {
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 25px;
         }
 
-        /* Car Card */
-        .car-card {
+        .card {
             background: #fff;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
         }
 
-        .car-card:hover {
+        .card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
         }
 
-        .car-image {
+        .card-img {
             width: 100%;
             height: 220px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            font-size: 80px;
         }
 
-        .car-image img {
+        .card-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .car-image .no-image {
-            font-size: 80px;
-        }
-
-        .car-details {
+        .card-body {
             padding: 25px;
         }
 
-        .car-title {
+        .card-title {
             font-size: 22px;
-            color: #000;
-            margin-bottom: 20px;
             font-weight: 600;
+            margin-bottom: 20px;
         }
 
-        .car-info {
+        .card-info {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
@@ -310,22 +234,16 @@
         .info-label {
             font-size: 11px;
             color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
             font-weight: 600;
         }
 
         .info-value {
-            color: #000;
             font-weight: 600;
             font-size: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .info-value.price {
-            color: #3457D5;
+            color: #3e6ae1;
             font-size: 18px;
         }
 
@@ -335,9 +253,10 @@
             border-radius: 50%;
             border: 2px solid #ddd;
             display: inline-block;
+            margin-left: 8px;
         }
 
-        .car-actions {
+        .card-actions {
             display: flex;
             gap: 10px;
             padding: 20px 25px;
@@ -345,11 +264,11 @@
             border-top: 1px solid #e0e0e0;
         }
 
-        .btn-small {
-            padding: 10px 20px;
-            font-size: 12px;
+        .card-actions .btn {
             flex: 1;
+            padding: 10px 20px;
             border-radius: 6px;
+            font-size: 12px;
         }
 
         .btn-edit {
@@ -357,568 +276,321 @@
             color: #fff;
         }
 
-        .btn-edit:hover {
-            background: #218838;
-        }
-
         .btn-delete {
             background: #dc3545;
             color: #fff;
         }
 
-        .btn-delete:hover {
-            background: #c82333;
-        }
-
-        /* Loading & Empty State */
-        .loading, .empty-state {
+        .loading, .empty {
             text-align: center;
             padding: 80px 20px;
             background: #fff;
             border-radius: 12px;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
         }
 
-        .loading {
-            font-size: 18px;
-            color: #666;
-        }
-
-        .empty-state h3 {
-            color: #000;
-            margin-bottom: 10px;
-            font-size: 24px;
-        }
-
-        .empty-state p {
-            color: #666;
-            font-size: 15px;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            header {
-                padding: 15px 20px;
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .container {
-                padding: 0 20px;
-            }
-
-            .top-bar {
-                flex-direction: column;
-                gap: 20px;
-                align-items: stretch;
-            }
-
-            .page-title {
-                font-size: 24px;
-                text-align: center;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cars-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-actions {
-                flex-direction: column;
-            }
-
-            .car-info {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .hidden {
-            display: none !important;
+            .form-grid { grid-template-columns: 1fr; }
+            .grid { grid-template-columns: 1fr; }
+            .card-info { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-<!-- Header -->
-<header>
-    <div class="logo">TESLA ADMIN</div>
-    <!-- FIX: Restored link to home.html -->
-    <a href="home.html" class="back-btn">← Back to Site</a>
-</header>
+    <header>
+        <div class="logo">TESLA ADMIN</div>
+        <div class="header-btns">
+            <a href="home.html" class="btn btn-back">← חזרה לאתר</a>
+            <button class="btn btn-logout" onclick="logout()">התנתק</button>
+        </div>
+    </header>
 
-<!-- Container -->
-<div class="container">
-    <!-- Top Bar -->
-    <div class="top-bar">
-        <h1 class="page-title">Vehicle Management</h1>
-        <button class="add-btn" onclick="toggleForm()">+ Add New Vehicle</button>
-    </div>
-
-    <!-- Form Section -->
-    <div class="form-section" id="formSection">
-        <h2 class="form-title" id="formTitle">Add New Vehicle</h2>
-        <form id="carForm" onsubmit="handleSubmit(event)">
-            <input type="hidden" id="carId">
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="brand">Brand *</label>
-                    <input type="text" id="brand" required minlength="2" maxlength="30" placeholder="Tesla">
-                    <span class="error-message" id="brandError"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="model">Model *</label>
-                    <input type="text" id="model" required minlength="2" maxlength="30" placeholder="Model S">
-                    <span class="error-message" id="modelError"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="year">Year *</label>
-                    <input type="number" id="year" required min="2000" max="2030" placeholder="2024">
-                    <span class="error-message" id="yearError"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="price">Price (₪) *</label>
-                    <input type="number" id="price" required min="100000" placeholder="300000">
-                    <span class="error-message" id="priceError"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="rangeKm">Range (km) *</label>
-                    <input type="number" id="rangeKm" required min="100" max="1000" placeholder="500">
-                    <span class="error-message" id="rangeKmError"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="color">Color *</label>
-                    <div class="color-input-group">
-                        <input type="color" id="colorPicker" value="#000000" onchange="updateColorText()">
-                        <input type="text" id="color" required pattern="^#[0-9A-Fa-f]{6}$" value="#000000" onchange="updateColorPicker()">
-                    </div>
-                    <span class="error-message" id="colorError"></span>
-                </div>
-
-                <div class="form-group full-width">
-                    <label for="imageUrl">Image URL (Optional)</label>
-                    <input type="url" id="imageUrl" placeholder="https://example.com/car-image.jpg">
-                </div>
-            </div>
-
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary" id="submitBtn">Add Vehicle</button>
-                <button type="button" class="btn btn-secondary" onclick="cancelForm()">Cancel</button>
-            </div>
-        </form>
-    </div>
-
-    <!-- Cars Section -->
-    <div class="cars-section">
-        <h2 class="section-subtitle" id="carsTitle">All Vehicles</h2>
-
-        <div id="loading" class="loading">Loading vehicles...</div>
-        <div id="emptyState" class="empty-state hidden">
-            <h3>No vehicles found</h3>
-            <p>Click "Add New Vehicle" to get started</p>
+    <div class="container">
+        <div class="top-bar">
+            <h1 class="page-title">ניהול רכבים</h1>
+            <button class="btn btn-add" onclick="toggleForm()">+ הוסף רכב חדש</button>
         </div>
 
-        <div id="carsGrid" class="cars-grid"></div>
-    </div>
-</div>
-
-<script>
-    // MOCK DATA SERVICE to simulate backend
-    // Since localhost:8080 isn't available in this preview environment
-    const MockService = {
-        getKey: () => 'tesla_cars_db',
-
-        getAll: async () => {
-            await new Promise(r => setTimeout(r, 600)); // Simulate network delay
-            const data = localStorage.getItem(MockService.getKey());
-            if (!data) {
-                // Seed initial data if empty
-                const initialData = [
-                    {
-                        id: '1',
-                        brand: 'Tesla',
-                        model: 'Model S Plaid',
-                        year: 2024,
-                        price: 645000,
-                        rangeKm: 600,
-                        color: '#d50000',
-                        imageUrl: 'https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Model-S-Main-Hero-Desktop-LHD.jpg'
-                    },
-                    {
-                        id: '2',
-                        brand: 'Tesla',
-                        model: 'Model Y',
-                        year: 2023,
-                        price: 255000,
-                        rangeKm: 533,
-                        color: '#ffffff',
-                        imageUrl: 'https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_auto/Model-Y-Main-Hero-Desktop-Global.jpg'
-                    }
-                ];
-                localStorage.setItem(MockService.getKey(), JSON.stringify(initialData));
-                return initialData;
-            }
-            return JSON.parse(data);
-        },
-
-        getById: async (id) => {
-            await new Promise(r => setTimeout(r, 300));
-            const cars = JSON.parse(localStorage.getItem(MockService.getKey()) || '[]');
-            const car = cars.find(c => c.id === id);
-            if (!car) throw new Error('Car not found');
-            return car;
-        },
-
-        create: async (car) => {
-            await new Promise(r => setTimeout(r, 600));
-            const cars = JSON.parse(localStorage.getItem(MockService.getKey()) || '[]');
-            const newCar = {
-                ...car,
-                id: Date.now().toString() // Generate a simple string ID
-            };
-            cars.push(newCar);
-            localStorage.setItem(MockService.getKey(), JSON.stringify(cars));
-            return newCar;
-        },
-
-        update: async (id, updates) => {
-            await new Promise(r => setTimeout(r, 600));
-            const cars = JSON.parse(localStorage.getItem(MockService.getKey()) || '[]');
-            const index = cars.findIndex(c => c.id === id);
-            if (index !== -1) {
-                cars[index] = { ...cars[index], ...updates, id: id }; // Ensure ID stays same
-                localStorage.setItem(MockService.getKey(), JSON.stringify(cars));
-                return cars[index];
-            }
-            throw new Error('Car not found');
-        },
-
-        delete: async (id) => {
-            await new Promise(r => setTimeout(r, 600));
-            let cars = JSON.parse(localStorage.getItem(MockService.getKey()) || '[]');
-            cars = cars.filter(c => c.id !== id);
-            localStorage.setItem(MockService.getKey(), JSON.stringify(cars));
-            return true;
-        }
-    };
-
-    let editingCarId = null;
-
-    // Check authentication
-    window.addEventListener('DOMContentLoaded', () => {
-        // Check for user
-        let user = JSON.parse(localStorage.getItem('teslaUser'));
-
-        // If you want to force login, you can uncomment this:
-        /*
-        if (!user) {
-            window.location.href = 'login.html';
-            return;
-        }
-        */
-
-        // Auto-create demo user only if we are testing and no one is logged in
-        if (!user) {
-            user = {
-                name: 'Demo Admin',
-                picture: 'https://ui-avatars.com/api/?name=Demo+Admin&background=0D8ABC&color=fff'
-            };
-            // We DON'T save to localStorage here automatically so that the logout flow works better
-            // But for the purpose of the demo working:
-            localStorage.setItem('teslaUser', JSON.stringify(user));
-        }
-
-        updateUserInfo(user);
-        loadCars();
-    });
-
-    // Update user info in header
-    function updateUserInfo(user) {
-        const backBtn = document.querySelector('.back-btn');
-        // Check if we already added the user info
-        if(document.getElementById('user-info-display')) return;
-
-        const userDisplay = document.createElement('div');
-        userDisplay.id = 'user-info-display';
-        userDisplay.style.cssText = 'display: flex; align-items: center; gap: 10px;';
-        userDisplay.innerHTML = `
-            <img src="${user.picture || 'https://via.placeholder.com/32'}" alt="${user.name}"
-                 style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid #fff;">
-            <span style="color: #fff; font-size: 14px;">${user.name}</span>
-            <button onclick="logout()"
-                    style="background: #dc3545; color: #fff; border: none; padding: 8px 16px;
-                           border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer;
-                           margin-left: 10px;">
-                Logout
-            </button>
-        `;
-        backBtn.parentElement.insertBefore(userDisplay, backBtn);
-    }
-
-    // Logout function
-    function logout() {
-        if (confirm('Are you sure you want to logout?')) {
-            localStorage.removeItem('teslaUser');
-            // FIX: Redirect to login.html instead of reload
-            window.location.href = 'login.html';
-        }
-    }
-
-    // Toggle Form
-    function toggleForm() {
-        const formSection = document.getElementById('formSection');
-        formSection.classList.toggle('active');
-
-        if (!formSection.classList.contains('active')) {
-            cancelForm();
-        } else {
-            formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }
-
-    // Cancel Form
-    function cancelForm() {
-        document.getElementById('carForm').reset();
-        document.getElementById('carId').value = '';
-        document.getElementById('formTitle').textContent = 'Add New Vehicle';
-        document.getElementById('submitBtn').textContent = 'Add Vehicle';
-        document.getElementById('formSection').classList.remove('active');
-        editingCarId = null;
-        clearErrors();
-    }
-
-    // Clear Errors
-    function clearErrors() {
-        const errorMessages = document.querySelectorAll('.error-message');
-        errorMessages.forEach(msg => msg.textContent = '');
-
-        const errorInputs = document.querySelectorAll('.error');
-        errorInputs.forEach(input => input.classList.remove('error'));
-    }
-
-    // Color Picker Sync
-    function updateColorText() {
-        const colorPicker = document.getElementById('colorPicker');
-        document.getElementById('color').value = colorPicker.value;
-    }
-
-    function updateColorPicker() {
-        const colorText = document.getElementById('color');
-        document.getElementById('colorPicker').value = colorText.value;
-    }
-
-    // Load Cars
-    async function loadCars() {
-        try {
-            document.getElementById('loading').classList.remove('hidden');
-            document.getElementById('emptyState').classList.add('hidden');
-            document.getElementById('carsGrid').innerHTML = '';
-
-            // FIX: Use MockService instead of fetch
-            const cars = await MockService.getAll();
-
-            console.log("Cars loaded:", cars);
-            document.getElementById('loading').classList.add('hidden');
-
-            if (!cars || cars.length === 0) {
-                document.getElementById('emptyState').classList.remove('hidden');
-                document.getElementById('carsTitle').textContent = `All Vehicles (0)`;
-            } else {
-                document.getElementById('carsTitle').textContent = `All Vehicles (${cars.length})`;
-                displayCars(cars);
-            }
-        } catch (error) {
-            console.error('Error loading cars:', error);
-            document.getElementById('loading').innerHTML =
-                `<p style="color: #dc3545;">Error loading vehicles: ${error.message}</p>`;
-        }
-    }
-
-    // Display Cars
-    function displayCars(cars) {
-        const carsGrid = document.getElementById('carsGrid');
-        carsGrid.innerHTML = '';
-
-        cars.forEach(car => {
-            const carCard = createCarCard(car);
-            carsGrid.appendChild(carCard);
-        });
-    }
-
-    // Create Car Card
-    function createCarCard(car) {
-        // Ensure ID exists
-        const validId = car.id || car._id;
-
-        const card = document.createElement('div');
-        card.className = 'car-card';
-
-        const imageHtml = car.imageUrl
-            ? `<img src="${car.imageUrl}" alt="${car.brand} ${car.model}" onerror="this.parentElement.innerHTML='<div class=\\'no-image\\'>🚗</div>'">`
-            : '<div class="no-image">🚗</div>';
-
-        card.innerHTML = `
-            <div class="car-image">
-                ${imageHtml}
-            </div>
-            <div class="car-details">
-                <h3 class="car-title">${car.brand} ${car.model}</h3>
-                <div class="car-info">
-                    <div class="info-item">
-                        <span class="info-label">Year</span>
-                        <span class="info-value">${car.year}</span>
+        <div class="form-section" id="formSection">
+            <h2 class="form-title" id="formTitle">הוסף רכב חדש</h2>
+            <form id="carForm" onsubmit="handleSubmit(event)">
+                <input type="hidden" id="carId">
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>מותג *</label>
+                        <input type="text" id="brand" required minlength="2" placeholder="Tesla">
                     </div>
-                    <div class="info-item">
-                        <span class="info-label">Price</span>
-                        <span class="info-value price">${formatPrice(car.price)}</span>
+                    <div class="form-group">
+                        <label>דגם *</label>
+                        <input type="text" id="model" required minlength="2" placeholder="Model S">
                     </div>
-                    <div class="info-item">
-                        <span class="info-label">Range</span>
-                        <span class="info-value">${car.rangeKm} km</span>
+                    <div class="form-group">
+                        <label>שנה *</label>
+                        <input type="number" id="year" required min="2000" max="2030" placeholder="2024">
                     </div>
-                    <div class="info-item">
-                        <span class="info-label">Color</span>
-                        <span class="info-value">
-                            <span class="color-box" style="background-color: ${car.color}"></span>
-                            ${car.color}
-                        </span>
+                    <div class="form-group">
+                        <label>מחיר (₪) *</label>
+                        <input type="number" id="price" required min="100000" placeholder="300000">
+                    </div>
+                    <div class="form-group">
+                        <label>טווח (ק"מ) *</label>
+                        <input type="number" id="rangeKm" required min="100" max="1000" placeholder="500">
+                    </div>
+                    <div class="form-group">
+                        <label>צבע *</label>
+                        <div class="color-group">
+                            <input type="color" id="colorPicker" value="#000000" onchange="document.getElementById('color').value=this.value">
+                            <input type="text" id="color" required value="#000000">
+                        </div>
+                    </div>
+                    <div class="form-group full">
+                        <label>כתובת תמונה</label>
+                        <input type="url" id="imageUrl" placeholder="https://...">
                     </div>
                 </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="submitBtn">הוסף רכב</button>
+                    <button type="button" class="btn btn-secondary" onclick="cancelForm()">ביטול</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="cars-section">
+            <h2 id="carsTitle">כל הרכבים</h2>
+            <div id="loading" class="loading">טוען רכבים...</div>
+            <div id="empty" class="empty" style="display:none">
+                <h3>אין רכבים</h3>
+                <p>לחץ "הוסף רכב חדש" כדי להתחיל</p>
             </div>
-            <div class="car-actions">
-                <button class="btn btn-edit btn-small">Edit</button>
-                <button class="btn btn-delete btn-small">Delete</button>
-            </div>
-        `;
+            <div id="grid" class="grid"></div>
+        </div>
+    </div>
 
-        const editBtn = card.querySelector('.btn-edit');
-        const deleteBtn = card.querySelector('.btn-delete');
+    <script>
+        const API = 'http://localhost:8081/api/cars';
+        let editingId = null;
 
-        editBtn.onclick = function() {
-            if(validId) editCar(validId);
-        };
+        // Check auth
+        const user = JSON.parse(localStorage.getItem('teslaUser'));
+        if (!user) {
+            window.location.href = 'login.html';
+        }
 
-        deleteBtn.onclick = function() {
-            if(validId) deleteCar(validId);
-        };
-
-        return card;
-    }
-
-    // Format Price
-    function formatPrice(price) {
-        return new Intl.NumberFormat('he-IL', {
-            style: 'currency',
-            currency: 'ILS',
-            minimumFractionDigits: 0,
-        }).format(price);
-    }
-
-    // Handle Submit
-    async function handleSubmit(event) {
-        event.preventDefault();
-        clearErrors();
-
-        const carData = {
-            brand: document.getElementById('brand').value,
-            model: document.getElementById('model').value,
-            year: parseInt(document.getElementById('year').value),
-            price: parseFloat(document.getElementById('price').value),
-            rangeKm: parseInt(document.getElementById('rangeKm').value),
-            color: document.getElementById('color').value,
-            imageUrl: document.getElementById('imageUrl').value || ''
-        };
-
-        const submitBtn = document.getElementById('submitBtn');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'Saving...';
-        submitBtn.disabled = true;
-
-        try {
-            if (editingCarId) {
-                await MockService.update(editingCarId, carData);
-                alert('Vehicle updated successfully!');
-            } else {
-                await MockService.create(carData);
-                alert('Vehicle added successfully!');
+        function logout() {
+            if (confirm('להתנתק?')) {
+                localStorage.removeItem('teslaUser');
+                window.location.href = 'login.html';
             }
-
-            cancelForm();
-            loadCars();
-        } catch (error) {
-            console.error('Error saving car:', error);
-            alert('Error saving vehicle: ' + error.message);
-        } finally {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }
-    }
-
-    // Edit Car
-    async function editCar(id) {
-        try {
-            // FIX: Use MockService
-            const car = await MockService.getById(id);
-
-            document.getElementById('carId').value = car.id;
-            document.getElementById('brand').value = car.brand;
-            document.getElementById('model').value = car.model;
-            document.getElementById('year').value = car.year;
-            document.getElementById('price').value = car.price;
-            document.getElementById('rangeKm').value = car.rangeKm;
-            document.getElementById('color').value = car.color;
-            document.getElementById('colorPicker').value = car.color;
-            document.getElementById('imageUrl').value = car.imageUrl || '';
-
-            document.getElementById('formTitle').textContent = 'Edit Vehicle';
-            document.getElementById('submitBtn').textContent = 'Update Vehicle';
-            document.getElementById('formSection').classList.add('active');
-
-            editingCarId = id;
-
-            document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
-        } catch (error) {
-            console.error('Error loading car for edit:', error);
-            alert('Error loading vehicle details');
-        }
-    }
-
-    // Delete Car
-    async function deleteCar(id) {
-        if (!confirm('Are you sure you want to delete this vehicle?')) {
-            return;
         }
 
-        try {
-            // FIX: Use MockService
-            await MockService.delete(id);
-
-            // Show notification
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed; top: 20px; right: 20px;
-                background: #28a745; color: white; padding: 15px 25px;
-                border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                z-index: 1000; animation: slideIn 0.3s ease;
-            `;
-            notification.textContent = 'Vehicle deleted successfully!';
-            document.body.appendChild(notification);
-
-            setTimeout(() => notification.remove(), 3000);
-
-            loadCars();
-        } catch (error) {
-            console.error('Error deleting car:', error);
-            alert('Error deleting vehicle: ' + error.message);
+        function toggleForm() {
+            document.getElementById('formSection').classList.toggle('active');
         }
-    }
-</script>
+
+        function cancelForm() {
+            document.getElementById('carForm').reset();
+            document.getElementById('carId').value = '';
+            document.getElementById('formTitle').textContent = 'הוסף רכב חדש';
+            document.getElementById('submitBtn').textContent = 'הוסף רכב';
+            document.getElementById('formSection').classList.remove('active');
+            editingId = null;
+        }
+
+        async function handleSubmit(e) {
+            e.preventDefault();
+
+            const data = {
+                brand: document.getElementById('brand').value,
+                model: document.getElementById('model').value,
+                year: parseInt(document.getElementById('year').value),
+                price: parseFloat(document.getElementById('price').value),
+                rangeKm: parseInt(document.getElementById('rangeKm').value),
+                color: document.getElementById('color').value,
+                imageUrl: document.getElementById('imageUrl').value || ''
+            };
+
+            try {
+                const url = editingId ? `${API}/${editingId}` : API;
+                const method = editingId ? 'PUT' : 'POST';
+                
+                const res = await fetch(url, {
+                    method: method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (res.ok) {
+                    alert(editingId ? 'הרכב עודכן!' : 'הרכב נוסף!');
+                    cancelForm();
+                    loadCars();
+                } else {
+                    alert('שגיאה בשמירה');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('שגיאה בחיבור לשרת');
+            }
+        }
+
+        async function loadCars() {
+            try {
+                document.getElementById('loading').style.display = 'block';
+                document.getElementById('empty').style.display = 'none';
+                document.getElementById('grid').innerHTML = '';
+
+                const res = await fetch(`${API}/all`);
+                const cars = await res.json();
+
+                document.getElementById('loading').style.display = 'none';
+
+                if (cars.length === 0) {
+                    document.getElementById('empty').style.display = 'block';
+                } else {
+                    document.getElementById('carsTitle').textContent = `כל הרכבים (${cars.length})`;
+                    displayCars(cars);
+                }
+            } catch (err) {
+                console.error(err);
+                document.getElementById('loading').innerHTML = 
+                    '<p style="color:#dc3545">שגיאה בטעינה. וודא שהשרת רץ על http://localhost:8081</p>';
+            }
+        }
+
+        function displayCars(cars) {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+
+            console.log('Cars from API:', cars); // Debug: check structure
+
+            cars.forEach(car => {
+                console.log('Car ID:', car.id, 'Full car:', car); // Debug each car
+                
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                const img = car.imageUrl 
+                    ? `<img src="${car.imageUrl}" alt="${car.brand} ${car.model}">`
+                    : '<div style="font-size:80px">🚗</div>';
+
+                card.innerHTML = `
+                    <div class="card-img">${img}</div>
+                    <div class="card-body">
+                        <h3 class="card-title">${car.brand} ${car.model}</h3>
+                        <div class="card-info">
+                            <div class="info-item">
+                                <span class="info-label">שנה</span>
+                                <span class="info-value">${car.year}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">מחיר</span>
+                                <span class="info-value price">₪${car.price.toLocaleString()}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">טווח</span>
+                                <span class="info-value">${car.rangeKm} ק"מ</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">צבע</span>
+                                <span class="info-value">
+                                    <span class="color-box" style="background:${car.color}"></span>
+                                    ${car.color}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-edit" data-id="${car.id || ''}">ערוך</button>
+                        <button class="btn btn-delete" data-id="${car.id || ''}">מחק</button>
+                    </div>
+                `;
+
+                // Add event listeners to buttons AFTER adding to DOM
+                grid.appendChild(card);
+                
+                // Get the ID from data attribute as fallback
+                const editBtn = card.querySelector('.btn-edit');
+                const deleteBtn = card.querySelector('.btn-delete');
+                
+                // Try multiple possible ID field names
+                const carId = car.id || car.carId || car.ID || car.car_id;
+                
+                if (editBtn) {
+                    editBtn.addEventListener('click', function() {
+                        console.log('Edit clicked, ID:', carId);
+                        if (carId) {
+                            editCar(carId);
+                        } else {
+                            alert('שגיאה: לא נמצא ID לרכב');
+                        }
+                    });
+                }
+                
+                if (deleteBtn) {
+                    deleteBtn.addEventListener('click', function() {
+                        console.log('Delete clicked, ID:', carId);
+                        if (carId) {
+                            deleteCar(carId);
+                        } else {
+                            alert('שגיאה: לא נמצא ID לרכב');
+                        }
+                    });
+                }
+            });
+        }
+
+        async function editCar(id) {
+            try {
+                const res = await fetch(`${API}/${id}`);
+                const car = await res.json();
+
+                document.getElementById('brand').value = car.brand;
+                document.getElementById('model').value = car.model;
+                document.getElementById('year').value = car.year;
+                document.getElementById('price').value = car.price;
+                document.getElementById('rangeKm').value = car.rangeKm;
+                document.getElementById('color').value = car.color;
+                document.getElementById('colorPicker').value = car.color;
+                document.getElementById('imageUrl').value = car.imageUrl || '';
+
+                document.getElementById('formTitle').textContent = 'עריכת רכב';
+                document.getElementById('submitBtn').textContent = 'עדכן רכב';
+                document.getElementById('formSection').classList.add('active');
+
+                editingId = id;
+            } catch (err) {
+                console.error(err);
+                alert('שגיאה בטעינת הרכב');
+            }
+        }
+
+        async function deleteCar(id) {
+            if (!confirm('למחוק רכב זה?')) return;
+
+            try {
+                const res = await fetch(`${API}/${id}`, { 
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (res.ok || res.status === 204) {
+                    alert('הרכב נמחק בהצלחה!');
+                    loadCars();
+                } else {
+                    const errorText = await res.text();
+                    console.error('Delete error:', errorText);
+                    alert('שגיאה במחיקה: ' + (errorText || 'שגיאה לא ידועה'));
+                }
+            } catch (err) {
+                console.error('Delete error:', err);
+                alert('שגיאה בחיבור לשרת: ' + err.message);
+            }
+        }
+
+        loadCars();
+    </script>
 </body>
 </html>

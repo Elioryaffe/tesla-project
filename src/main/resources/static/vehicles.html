@@ -415,6 +415,7 @@
         <a href="home.html#model-3">Model 3</a>
         <a href="home.html#model-x">Model X</a>
         <a href="home.html#model-y">Model Y</a>
+        <a href="home.html#cybertruck">Cybertruck</a>
     </nav>
 
     <div class="user-section">
@@ -455,24 +456,13 @@
             <a href="#">Support</a>
         </div>
         <div class="footer-bottom">
-            Tesla © 2024 - Built with passion for electric vehicles
+            Tesla © 2026 -Elior Yaffe- Built with passion for electric vehicles
         </div>
     </div>
 </footer>
 
 <script>
-    // Use MockService to read local storage data (Sync with admin panel)
-    const MockService = {
-        // Updated key to ensure clean list (matches admin.html)
-        getKey: () => 'tesla_cars_db_clean',
-
-        getAll: async () => {
-            await new Promise(r => setTimeout(r, 600)); // Simulate network delay
-            const data = localStorage.getItem(MockService.getKey());
-            if (!data) return []; // Return empty if no data
-            return JSON.parse(data);
-        }
-    };
+    const API_URL = 'http://localhost:8081/api/cars';
 
     // Check authentication
     function checkAuth() {
@@ -513,15 +503,15 @@
         }
     }
 
-    // Load vehicles from LocalStorage (Mock Service)
+    // Load vehicles from API
     async function loadVehicles() {
         try {
             document.getElementById('loading').style.display = 'block';
             document.getElementById('emptyState').style.display = 'none';
             document.getElementById('vehiclesGrid').innerHTML = '';
 
-            // Get cars from the CLEAN database key
-            const vehicles = await MockService.getAll();
+            const response = await fetch(`${API_URL}/all`);
+            const vehicles = await response.json();
 
             document.getElementById('loading').style.display = 'none';
 
@@ -533,7 +523,7 @@
         } catch (error) {
             console.error('Error loading vehicles:', error);
             document.getElementById('loading').innerHTML =
-                '<p style="color: #dc3545;">Error loading vehicle data.</p>';
+                '<p style="color: #dc3545;">Unable to load vehicles. Please ensure the server is running on http://localhost:8081</p>';
         }
     }
 

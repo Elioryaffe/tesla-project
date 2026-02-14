@@ -1,18 +1,14 @@
 <!DOCTYPE html>
-<html lang="he" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tesla - Admin Login</title>
+    <title>Tesla - Sign In</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            font-family: 'Gotham SSm A', 'Gotham SSm B', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
@@ -21,11 +17,11 @@
             padding: 20px;
         }
 
-        .login-container {
+        .container {
             background: white;
             padding: 50px 40px;
             border-radius: 16px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             max-width: 400px;
             width: 100%;
             text-align: center;
@@ -36,7 +32,6 @@
             font-weight: 700;
             letter-spacing: 3px;
             margin-bottom: 10px;
-            color: #000;
         }
 
         .subtitle {
@@ -44,63 +39,12 @@
             color: #666;
             margin-bottom: 40px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         h2 {
             font-size: 24px;
             margin-bottom: 30px;
             color: #333;
-            font-weight: 600;
-        }
-
-        .google-btn {
-            width: 100%;
-            background: white;
-            border: 2px solid #e0e0e0;
-            padding: 14px 20px;
-            border-radius: 50px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .google-btn:hover {
-            background: #f8f8f8;
-            border-color: #3457D5;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(52, 87, 213, 0.2);
-        }
-
-        .google-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 30px 0;
-            color: #999;
-            font-size: 13px;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .divider span {
-            padding: 0 15px;
         }
 
         .form-group {
@@ -114,8 +58,6 @@
             font-weight: 600;
             font-size: 13px;
             color: #333;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .form-group input {
@@ -124,17 +66,16 @@
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             font-size: 15px;
-            transition: all 0.3s ease;
         }
 
         .form-group input:focus {
             outline: none;
-            border-color: #3457D5;
+            border-color: #3e6ae1;
         }
 
-        .login-btn {
+        .btn {
             width: 100%;
-            background: #3457D5;
+            background: #3e6ae1;
             color: white;
             border: none;
             padding: 14px 20px;
@@ -142,246 +83,83 @@
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
             margin-top: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .login-btn:hover {
-            background: #2845b8;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(52, 87, 213, 0.4);
+        .btn:hover {
+            background: #2952cc;
         }
 
-        .back-link {
+        .info {
+            font-size: 12px;
+            color: #999;
+            margin-top: 20px;
+        }
+
+        .back {
             margin-top: 30px;
             display: block;
             color: #666;
             text-decoration: none;
             font-size: 14px;
-            transition: color 0.3s ease;
         }
 
-        .back-link:hover {
-            color: #3457D5;
-        }
-
-        .info-text {
-            font-size: 12px;
-            color: #999;
-            margin-top: 20px;
-            line-height: 1.6;
-        }
-
-        .user-info {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background: #f8f8f8;
-            border-radius: 12px;
-            text-align: left;
-        }
-
-        .user-info.active {
-            display: block;
-        }
-
-        .user-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-        }
-
-        .user-name {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #000;
-        }
-
-        .user-email {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        .logout-btn {
-            width: 100%;
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .logout-btn:hover {
-            background: #c82333;
-        }
-
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 40px 25px;
-            }
-            
-            .logo {
-                font-size: 28px;
-            }
+        .back:hover {
+            color: #3e6ae1;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
+    <div class="container">
         <div class="logo">TESLA</div>
-        <div class="subtitle">Admin Panel</div>
-        <h2>Sign In</h2>
+        <div class="subtitle">Sign In</div>
+        <h2>Welcome Back</h2>
 
-        <!-- Google Sign In Button -->
-        <button class="google-btn" onclick="signInWithGoogle()">
-            <svg class="google-icon" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-            </svg>
-            Continue with Google
-        </button>
-
-        <div class="divider">
-            <span>OR</span>
-        </div>
-
-        <!-- Regular Login Form -->
-        <form id="loginForm" onsubmit="handleLogin(event)">
+        <form onsubmit="handleLogin(event)">
             <div class="form-group">
-                <label for="email">Email</label>
+                <label>Email</label>
                 <input type="email" id="email" required placeholder="admin@tesla.com">
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
+                <label>Password</label>
                 <input type="password" id="password" required placeholder="••••••••">
             </div>
 
-            <button type="submit" class="login-btn">Sign In</button>
+            <button type="submit" class="btn">Sign In</button>
         </form>
 
-        <p class="info-text">
-            Demo credentials:<br>
-            Email: admin@tesla.com<br>
-            Password: admin123
+        <p class="info">
+            Demo: admin@tesla.com / admin123
         </p>
 
-        <!-- User Info (shown after login) -->
-        <div class="user-info" id="userInfo">
-            <img class="user-avatar" id="userAvatar" src="" alt="User">
-            <div class="user-name" id="userName"></div>
-            <div class="user-email" id="userEmail"></div>
-            <button class="logout-btn" onclick="logout()">Sign Out</button>
-        </div>
-
-        <a href="index.html" class="back-link">← Back to Home</a>
+        <a href="home.html" class="back">← Back to Home</a>
     </div>
 
-    <!-- Google Sign-In SDK -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    
     <script>
-        // Check if user is already logged in
-        window.addEventListener('DOMContentLoaded', () => {
-            const user = JSON.parse(localStorage.getItem('teslaUser'));
-            if (user) {
-                // Redirect to admin page
-                window.location.href = 'admin.html';
-            }
-        });
-
-        // Initialize Google Sign In
-        function initializeGoogleSignIn() {
-            google.accounts.id.initialize({
-                client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com', // Replace with your actual client ID
-                callback: handleGoogleSignIn
-            });
-        }
-
-        // Handle Google Sign In
-        function handleGoogleSignIn(response) {
-            // Decode the JWT token
-            const userObject = parseJwt(response.credential);
-            
-            const user = {
-                name: userObject.name,
-                email: userObject.email,
-                picture: userObject.picture,
-                loginMethod: 'google'
-            };
-
-            // Save user to localStorage
-            localStorage.setItem('teslaUser', JSON.stringify(user));
-            
-            // Redirect to admin page
-            window.location.href = 'admin.html';
-        }
-
-        // Parse JWT token
-        function parseJwt(token) {
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-            return JSON.parse(jsonPayload);
-        }
-
-        // Sign in with Google (opens Google sign-in)
-        function signInWithGoogle() {
-            // For demo purposes, simulate Google login
-            alert('Google Sign-In Demo\n\nTo use real Google authentication:\n1. Get a Google Client ID from Google Cloud Console\n2. Replace YOUR_GOOGLE_CLIENT_ID in the code\n3. The button will work automatically!\n\nFor now, using demo login...');
-            
-            // Demo Google user
-            const demoUser = {
-                name: 'Tesla Admin',
-                email: 'admin@tesla.com',
-                picture: 'https://ui-avatars.com/api/?name=Tesla+Admin&background=3457D5&color=fff&size=200',
-                loginMethod: 'google-demo'
-            };
-            
-            localStorage.setItem('teslaUser', JSON.stringify(demoUser));
-            window.location.href = 'admin.html';
-        }
-
-        // Handle regular login
-        function handleLogin(event) {
-            event.preventDefault();
+        function handleLogin(e) {
+            e.preventDefault();
             
             const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            const pass = document.getElementById('password').value;
 
-            // Demo login validation
-            if (email === 'admin@tesla.com' && password === 'admin123') {
+            if (email === 'admin@tesla.com' && pass === 'admin123') {
                 const user = {
                     name: 'Tesla Admin',
                     email: email,
-                    picture: 'https://ui-avatars.com/api/?name=Tesla+Admin&background=3457D5&color=fff&size=200',
-                    loginMethod: 'email'
+                    picture: 'https://ui-avatars.com/api/?name=Tesla+Admin&background=3e6ae1&color=fff&size=200'
                 };
 
                 localStorage.setItem('teslaUser', JSON.stringify(user));
-                window.location.href = 'admin.html';
+                window.location.href = 'home.html';
             } else {
-                alert('Invalid credentials!\n\nUse:\nEmail: admin@tesla.com\nPassword: admin123');
+                alert('Invalid credentials!\n\nUse: admin@tesla.com / admin123');
             }
         }
 
-        // Logout
-        function logout() {
-            localStorage.removeItem('teslaUser');
-            window.location.reload();
+        // Check if already logged in
+        if (localStorage.getItem('teslaUser')) {
+            window.location.href = 'home.html';
         }
     </script>
 </body>
