@@ -1,4 +1,4 @@
-# 🚗⚡ אתר טסלה - פרויקט Full Stack
+# 🚗⚡ אתר טסלה - פרויקט Devops
 
 אתר מקצועי ומלא בהשראת טסלה עם Spring Boot בצד השרת ו-Frontend מודרני.
 
@@ -57,8 +57,8 @@
 
 **1. שכפל את הפרויקט**
 ```bash
-git clone https://github.com/elioryaffe/tesla-project.git
-cd tesla-project
+cd C:\Users\username\Downloads\project\project
+docker-compose up --force-recreate
 ```
 
 **2. הרץ עם Docker Compose**
@@ -117,6 +117,7 @@ mvn spring-boot:run
 ```
 פתח את home.html בדפדפן שלך
 ```
+http://localhost:8081/home.html
 
 **3. פרטי התחברות (Demo)**
 ```
@@ -250,30 +251,24 @@ Model Y: https://digitalassets.tesla.com/tesla-contents/image/upload/f_auto,q_au
 
 ### docker-compose.yml
 ```yaml
-version: "3.8"
-
+version: "3"
 services:
-  db:
-    image: postgres:13
-    environment:
-      POSTGRES_DB: tesla_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./postgresdata:/var/lib/postgresql/data
-
   appserver:
-    image: elioryaffe/tesla-project:latest
+    container_name: server
+    image: elioryaffe/tesla-project:tesla-project-001
     ports:
-      - "8081:8081"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/tesla_db
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: postgres
+      - 8081:8081
     depends_on:
       - db
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgresdata:/var/lib/postgresql/
+    privileged: true
 ```
 
 ### הורדה מ-DockerHub
@@ -288,17 +283,17 @@ docker pull elioryaffe/tesla-project:latest
 ### שינוי פורט
 ערוך את `application.properties`:
 ```properties
-server.port=8082
+server.port=8081
 ```
 
 עדכן את קבצי ה-HTML:
 ```javascript
-const API = 'http://localhost:8082/api/cars';
+const API = 'http://localhost:8081/api/cars';
 ```
 
 ### הגדרות דאטהבייס
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/your_db
+spring.datasource.url=jdbc:postgresql://db:5432/your_db
 spring.datasource.username=your_username
 spring.datasource.password=your_password
 ```
@@ -377,10 +372,6 @@ spring.datasource.password=your_password
 - קהילת Docker
 
 ---
-
-## 📞 תמיכה
-
-אם יש לך שאלות או בעיות, אנא פתח issue ב-GitHub.
 
 ---
 
