@@ -7,10 +7,7 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13-blue?style=for-the-badge&logo=postgresql)
 ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker)
 
-![Tesla Website](https://img.shields.io/badge/Tesla-Website-red?style=for-the-badge&logo=tesla)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.5.2-brightgreen?style=for-the-badge&logo=springboot)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13-blue?style=for-the-badge&logo=postgresql)
-![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker)
+
 
 ## 📸 צילומי מסך
 
