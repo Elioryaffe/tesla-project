@@ -7,16 +7,25 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13-blue?style=for-the-badge&logo=postgresql)
 ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker)
 
+![Tesla Website](https://img.shields.io/badge/Tesla-Website-red?style=for-the-badge&logo=tesla)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.5.2-brightgreen?style=for-the-badge&logo=springboot)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13-blue?style=for-the-badge&logo=postgresql)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker)
+
 ## 📸 צילומי מסך
 
-### דף הבית
-![דף הבית](https://via.placeholder.com/800x400/000000/FFFFFF?text=Tesla+Home+Page)
+### דף הבית - Model S Hero Section
+![דף הבית](./screenshots/home.png)
+*דף הבית עם Hero section מלא של Tesla Model S, כולל סטטיסטיקות ביצועים (1.99s, 200mph, 396mi)*
 
-### גלריית רכבים
-![רכבים](https://via.placeholder.com/800x400/000000/FFFFFF?text=All+Vehicles)
+### גלריית רכבים - All Vehicles
+![גלריית רכבים](./screenshots/vehicles.png)
+*דף "All Vehicles" המציג את כל הרכבים הזמינים עם תמונות, מחירים וטווח*
 
-### פאנל ניהול
-![ניהול](https://via.placeholder.com/800x400/000000/FFFFFF?text=Admin+Panel)
+### פאנל ניהול - Admin Panel
+![פאנל ניהול](./screenshots/admin.png)
+*פאנל ניהול מלא בעברית עם 6 רכבים, כולל יכולות עריכה ומחיקה*
+
 
 ---
 
